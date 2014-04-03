@@ -1,0 +1,6 @@
+fernando@insp15:~/Proyectos/google_appengine$ dev_appserver.py ../work_to_do/
+
+http://localhost:8080/ ===>  main
+http://localhost:8000/ ===>  settings
+
+fernando@insp15:~/Proyectos/google_appengine$ appcfg.py update ../work_to_do/
