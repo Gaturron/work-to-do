@@ -4,3 +4,8 @@ http://localhost:8080/ ===>  main
 http://localhost:8000/ ===>  settings
 
 fernando@insp15:~/Proyectos/google_appengine$ appcfg.py update ../work_to_do/
+
+Para probar la API:
+==================
+
+curl -X POST http://localhost:8080/project/new -b "dev_appserver_login="test@example.com:False:18580..."; Path=/;" --data "name=nm3&description=desc3"
