@@ -2,7 +2,12 @@ import os
 import webapp2
 
 from google.appengine.api import users
-from controller.project import project
+from controller.project import projectList
+from controller.project import projectNew
+from controller.project import projectDelete
+from controller.project import projectUsers
+from controller.item import itemList
+from controller.item import itemNew
 from model.Project import Project
 
 class MainPage(webapp2.RequestHandler):
@@ -18,7 +23,11 @@ class MainPage(webapp2.RequestHandler):
 
 application = webapp2.WSGIApplication([
     ('/', MainPage),
-    ('/project', project),
-    ('/project/new', project),
-    ('/project/delete', project)
+    ('/project', projectList),
+    ('/project/new', projectNew),
+    ('/project/delete', projectDelete),
+    ('/project/addUser', projectUsers),
+    ('/project/([^/]+)/items', itemList),
+    ('/project/([^/]+)/items/new', itemNew),
+    ('/project/([^/]+)/items/delete', itemNew)
 ], debug=True)
