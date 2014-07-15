@@ -1,18 +1,22 @@
-import os
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""Configuration of the site"""
+
 import webapp2
 
 from google.appengine.api import users
-from controller.project import projectList
-from controller.project import projectNew
-from controller.project import projectDelete
-from controller.project import projectUsers
-from controller.item import itemList
-from controller.item import itemNew
-from model.Project import Project
+from controller.project import ProjectList
+from controller.project import ProjectNew
+from controller.project import ProjectDelete
+from controller.project import ProjectUsers
+from controller.item import ItemList
+from controller.item import ItemNew
 
 class MainPage(webapp2.RequestHandler):
+    """MainPage"""
 
     def get(self):
+        """Gets a user"""
         user = users.get_current_user()
 
         if user:
@@ -23,11 +27,11 @@ class MainPage(webapp2.RequestHandler):
 
 application = webapp2.WSGIApplication([
     ('/', MainPage),
-    ('/project', projectList),
-    ('/project/new', projectNew),
-    ('/project/delete', projectDelete),
-    ('/project/addUser', projectUsers),
-    ('/project/([^/]+)/items', itemList),
-    ('/project/([^/]+)/items/new', itemNew),
-    ('/project/([^/]+)/items/delete', itemNew)
+    ('/project', ProjectList),
+    ('/project/new', ProjectNew),
+    ('/project/delete', ProjectDelete),
+    ('/project/addUser', ProjectUsers),
+    ('/project/([^/]+)/items', ItemList),
+    ('/project/([^/]+)/items/new', ItemNew),
+    ('/project/([^/]+)/items/delete', ItemNew)
 ], debug=True)

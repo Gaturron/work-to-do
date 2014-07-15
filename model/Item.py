@@ -1,3 +1,5 @@
+"""Model for an item, could be like a task"""
+
 from google.appengine.ext import db
 from google.appengine.api import users
 from model.Project import Project

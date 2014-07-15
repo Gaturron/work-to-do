@@ -1,13 +1,12 @@
+"""Item controller"""
 import cgi
 import webapp2
-import json
 
 from model.Project import Project
 from model.Item import Item
 from model.jsonize import jsonize
-from google.appengine.api import users
 
-class itemList(webapp2.RequestHandler):
+class ItemList(webapp2.RequestHandler):
     """List Items"""
 
     def get(self, projectKey):
@@ -22,7 +21,7 @@ class itemList(webapp2.RequestHandler):
         self.response.headers['Content-Type'] = 'application/json'   
         self.response.out.write(json.to_dict(items))
 
-class itemNew(webapp2.RequestHandler):
+class ItemNew(webapp2.RequestHandler):
     """New Item"""
 
     def post(self, projectKey):
@@ -38,7 +37,7 @@ class itemNew(webapp2.RequestHandler):
 
         self.response.out.write('ok')
 
-class itemDelete(webapp2.RequestHandler):
+class ItemDelete(webapp2.RequestHandler):
     """Delete Item"""
 
     def post(self, projectKey):

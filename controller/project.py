@@ -1,12 +1,13 @@
+"""Project controller"""
 import cgi
 import webapp2
-import json
 
 from model.Project import Project
 from model.jsonize import jsonize
 from google.appengine.api import users
+from google.appengine.api.datastore import Key
 
-class projectList(webapp2.RequestHandler):
+class ProjectList(webapp2.RequestHandler):
     """List project"""
     
     def get(self):
@@ -19,7 +20,7 @@ class projectList(webapp2.RequestHandler):
         self.response.headers['Content-Type'] = 'application/json'   
         self.response.out.write(json.to_dict(projects))
 
-class projectNew(webapp2.RequestHandler):
+class ProjectNew(webapp2.RequestHandler):
     """New project"""
 
     def post(self):
@@ -34,25 +35,29 @@ class projectNew(webapp2.RequestHandler):
 
         self.response.out.write('ok')
 
-class projectDelete(webapp2.RequestHandler):
+class ProjectDelete(webapp2.RequestHandler):
     """Delete project"""
 
-    def delete(self):
+    def post(self):
 
         user = users.get_current_user()
-        projects = Project.all().filter('users =', user).run()
+        key = Key(cgi.escape(self.request.get('key')))
 
-        key = cgi.escape(self.request.get('key'))
+        projects = Project.all()
+        projects.filter('users =', user)
+        projects.filter('__key__ = ', key)
+        projects.run()
 
-        project = Project.get(key)
-
-        if (project in projects):
-            project.delete()
+        project = projects.fetch(1)
+        
+        if project:
+            project[0].delete()
             self.response.out.write('ok')
+
         else:
             self.response.out.write('fail')            
 
-class projectUsers(webapp2.RequestHandler):
+class ProjectUsers(webapp2.RequestHandler):
     """methods to edit projects users"""
 
     def post(self):
@@ -62,8 +67,8 @@ class projectUsers(webapp2.RequestHandler):
         project = Project.get(key)
 
         if (user in project.users):
-            userMail = cgi.escape(self.request.get('userMail'))
-            user = users.User(userMail)
+            user_mail = cgi.escape(self.request.get('userMail'))
+            user = users.User(user_mail)
 
             project.users.append(user)
             project.put()
