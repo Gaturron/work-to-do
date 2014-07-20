@@ -8,4 +8,8 @@ fernando@insp15:~/Proyectos/google_appengine$ appcfg.py update ../work_to_do/
 Para probar la API:
 ==================
 
-curl -X POST http://localhost:8080/project/new -b "dev_appserver_login="test@example.com:False:18580..."; Path=/;" --data "name=nm3&description=desc3"
+New Project:
+curl -X POST http://localhost:8080/project/new -b "v_appserver_login="test@example.com";" --data "name=nm1&description=desc1"
+
+Delete Preject:
+curl -X POST http://localhost:8080/project/delete -b "v_appserver_login="test@example.com";" --data "key="

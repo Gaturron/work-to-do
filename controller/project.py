@@ -13,13 +13,15 @@ class ProjectList(webapp2.RequestHandler):
     def get(self):
 
         user = users.get_current_user()
-        projects = Project.all().filter('users =', user).run()
+
+        projects = Project.all(keys_only=True).filter('users =', user).run()
+        print projects
 
         json = jsonize()
 
         self.response.headers['Content-Type'] = 'application/json'   
         self.response.out.write(json.to_dict(projects))
-
+        
 class ProjectNew(webapp2.RequestHandler):
     """New project"""
 

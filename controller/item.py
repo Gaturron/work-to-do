@@ -45,13 +45,17 @@ class ItemDelete(webapp2.RequestHandler):
         projectKey = cgi.escape(projectKey)
         project = Project.get(projectKey)
 
-        items = Item.all().filter('project =', project).run()
-
         ItemKey = cgi.escape(self.request.get('ItemKey'))
-        item = Item.get(ItemKey)
 
-        if (item in items):
-            item.delete()
+        items = Item.all()
+        Items.filter('project =', project)
+        Items.filter('__key__= ', ItemKey)
+        Items.run()
+
+        item = Items.fetch(1)
+
+        if item:
+            item[0].delete()
             self.response.out.write('ok')
         else:
             self.response.out.write('fail')
