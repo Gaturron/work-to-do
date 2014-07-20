@@ -16,6 +16,9 @@ curl -X POST http://localhost:8080/project/new -b "dev_appserver_login="test@exa
 Delete Preject:
 curl -X POST http://localhost:8080/project/delete -b "dev_appserver_login="test@example.com";" --data "key=????"
 
+New Item:
+curl -X POST http://localhost:8080/????/items/new -b "dev_appserver_login="test@example.com:False"; Path=/;" --data "name=itm1&description=itm1"
+
 Other Ideas:
 ===========
 https://github.com/Gaturron/work-to-do.git

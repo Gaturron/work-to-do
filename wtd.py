@@ -11,6 +11,7 @@ from controller.project import ProjectDelete
 from controller.project import ProjectUsers
 from controller.item import ItemList
 from controller.item import ItemNew
+from controller.item import ItemDelete
 
 class MainPage(webapp2.RequestHandler):
     """MainPage"""
@@ -26,12 +27,12 @@ class MainPage(webapp2.RequestHandler):
             self.redirect(users.create_login_url(self.request.uri))
 
 application = webapp2.WSGIApplication([
-    ('/', MainPage),
-    ('/project', ProjectList),
-    ('/project/new', ProjectNew),
-    ('/project/delete', ProjectDelete),
-    ('/project/addUser', ProjectUsers),
-    ('/project/([^/]+)/items', ItemList),
-    ('/project/([^/]+)/items/new', ItemNew),
-    ('/project/([^/]+)/items/delete', ItemNew)
+    webapp2.Route('/', handler=MainPage),
+    webapp2.Route('/project', handler=ProjectList),
+    webapp2.Route('/project/new', handler=ProjectNew),
+    webapp2.Route('/project/delete', handler=ProjectDelete),
+    webapp2.Route('/project/addUser', handler=ProjectUsers),
+    webapp2.Route('/project/<project_key:[^/]+>/items', handler=ItemList, name='project_key'),
+    webapp2.Route('/project/<project_key:[^/]+>/items/new', handler=ItemNew, name='project_key'),
+    webapp2.Route('/project/<project_key:[^/]+>/items/delete', handler=ItemDelete, name='project_key')
 ], debug=True)

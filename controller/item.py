@@ -9,28 +9,38 @@ from model.jsonize import jsonize
 class ItemList(webapp2.RequestHandler):
     """List Items"""
 
-    def get(self, projectKey):
+    def get(self, project_key):
 
-        projectKey = cgi.escape(projectKey)
-        project = Project.get(projectKey)
+        project_key = cgi.escape(project_key)
+        project = Project.get(project_key)
+        print project
 
-        items = Item.all().filter('project =', project).run()
+        items = Item.all()
+        items.filter('project =', project)
+        items.run()
 
         json = jsonize()
 
+        items_list = []    
+        for item in items:
+            items_list.append(json.to_dict(item))
+
         self.response.headers['Content-Type'] = 'application/json'   
-        self.response.out.write(json.to_dict(items))
+        self.response.out.write(items_list)
 
 class ItemNew(webapp2.RequestHandler):
     """New Item"""
 
-    def post(self, projectKey):
+    def post(self, project_key):
 
-        projectKey = cgi.escape(projectKey)
-        project = Project.get(projectKey)
+        project_key = cgi.escape(project_key)
+        project = Project.get(project_key)
+        print project
 
         name = cgi.escape(self.request.get('name'))
+        print name
         description = cgi.escape(self.request.get('description'))
+        print description
 
         item = Item(name= name, description= description, project= project)
         item.put()
@@ -40,10 +50,10 @@ class ItemNew(webapp2.RequestHandler):
 class ItemDelete(webapp2.RequestHandler):
     """Delete Item"""
 
-    def post(self, projectKey):
+    def post(self, project_key):
 
-        projectKey = cgi.escape(projectKey)
-        project = Project.get(projectKey)
+        project_key = cgi.escape(project_key)
+        project = Project.get(project_key)
 
         ItemKey = cgi.escape(self.request.get('ItemKey'))
 
