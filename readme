@@ -13,3 +13,8 @@ curl -X POST http://localhost:8080/project/new -b "v_appserver_login="test@examp
 
 Delete Preject:
 curl -X POST http://localhost:8080/project/delete -b "v_appserver_login="test@example.com";" --data "key="
+
+Other Ideas:
+===========
+https://github.com/Gaturron/work-to-do.git
+https://trello.com/

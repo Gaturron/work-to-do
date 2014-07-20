@@ -7,6 +7,8 @@ from model.jsonize import jsonize
 from google.appengine.api import users
 from google.appengine.api.datastore import Key
 
+from django.utils import simplejson as json
+
 class ProjectList(webapp2.RequestHandler):
     """List project"""
     
