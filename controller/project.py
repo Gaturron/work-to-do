@@ -7,8 +7,6 @@ from model.jsonize import jsonize
 from google.appengine.api import users
 from google.appengine.api.datastore import Key
 
-from django.utils import simplejson as json
-
 class ProjectList(webapp2.RequestHandler):
     """List project"""
     
@@ -16,14 +14,19 @@ class ProjectList(webapp2.RequestHandler):
 
         user = users.get_current_user()
 
-        projects = Project.all(keys_only=True).filter('users =', user).run()
-        print projects
+        projects = Project.all(keys_only=False)
+        projects.filter('users =', user)
+        projects.run()
 
         json = jsonize()
 
+        projects_list = []    
+        for project in projects:
+            projects_list.append(json.to_dict(project))
+
         self.response.headers['Content-Type'] = 'application/json'   
-        self.response.out.write(json.to_dict(projects))
-        
+        self.response.out.write(projects_list)
+
 class ProjectNew(webapp2.RequestHandler):
     """New project"""
 

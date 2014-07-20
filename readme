@@ -9,10 +9,12 @@ Para probar la API:
 ==================
 
 New Project:
-curl -X POST http://localhost:8080/project/new -b "v_appserver_login="test@example.com";" --data "name=nm1&description=desc1"
+curl -X POST http://localhost:8080/project/new -b "dev_appserver_login="test@example.com:False"; Path=/;" --data "name=nm1&description=desc1"
+
+curl -X POST http://localhost:8080/project/new -b "dev_appserver_login="test@example.com";" --data "name=nm1&description=desc1"
 
 Delete Preject:
-curl -X POST http://localhost:8080/project/delete -b "v_appserver_login="test@example.com";" --data "key="
+curl -X POST http://localhost:8080/project/delete -b "dev_appserver_login="test@example.com";" --data "key=????"
 
 Other Ideas:
 ===========
