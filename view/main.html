@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html ng-app>
+    <head>
+        <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.2.20/angular.js'></script>
+        <script>
+            function Clock($scope) {
+                $scope.currentTime = new Date();
+            }
+        </script>
+        <title>
+            A Small Hello 
+        </title>
+    </head>
+    <body>
+        <H1>Hi</H1>
+        <P>This is very minimal "hello world" html document.</P> 
+        <p ng-controller='Clock'>
+            The current time is {{currentTime | date:'h:mm:ss a'}}.
+        <p>
+    </body>
+</html>
