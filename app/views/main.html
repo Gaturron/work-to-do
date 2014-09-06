@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html ng-app='work-to-do'>
+  <head>
+    <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.2.20/angular.js'></script>
+    <script src='//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js'></script>
+    <script src='../app.js'></script>
+    <title>
+      A Small Hello 
+    </title>
+  </head>
+  <body ng-controller='mainController'>
+    <H1>Hi</H1>
+
+    <p>{{message}}</p>
+    <P>This is very minimal "hello world" html document.</P> 
+    <p>
+      The current time is {{currentTime | date:'h:mm:ss a'}}.
+    <p>
+  </body>
+</html>

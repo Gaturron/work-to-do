@@ -16,7 +16,7 @@ from controller.item import ItemNew
 from controller.item import ItemDelete
 
 JINJA_ENVIRONMENT = jinja2.Environment(
-    loader=jinja2.FileSystemLoader(os.path.join(os.path.dirname(__file__), './view')),
+    loader=jinja2.FileSystemLoader(os.path.join(os.path.dirname(__file__), './app')),
     extensions=['jinja2.ext.autoescape'],
     autoescape=True,
     variable_start_string= '((', 
@@ -36,7 +36,7 @@ class MainPage(webapp2.RequestHandler):
             }
 
             self.response.headers['Content-Type'] = 'text/html'
-            template = JINJA_ENVIRONMENT.get_template('main.html')
+            template = JINJA_ENVIRONMENT.get_template('/views/main.html')
             self.response.write(template.render(values))
             
         else:
