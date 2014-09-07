@@ -1,6 +1,7 @@
 angular.module('worktodoApp', [
     'ngRoute',
-    'worktodoControllers'
+    'worktodoControllers',
+    'worktodoServices'
 ])
     .config(['$routeProvider', 
         function($routeProvider) {

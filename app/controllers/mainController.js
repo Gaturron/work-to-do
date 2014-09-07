@@ -1,9 +1,10 @@
 angular.module('worktodoControllers', [])
 
-    .controller('mainController', ['$scope', 
+    .controller('mainController', ['$scope', 'Project',
 
-        function($scope) {
-            $scope.message = 'Everyone come and see how good I look!';
+        function($scope, Project) {
+
+            $scope.message = Project.query();
             $scope.currentTime = new Date();
         }
     ]);
