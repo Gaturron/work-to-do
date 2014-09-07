@@ -1,11 +1,13 @@
-angular.module('work-to-do', [
-    'ngRoute'
+angular.module('worktodoApp', [
+    'ngRoute',
+    'worktodoControllers'
 ])
-    .config(function($routeProvider) {
-        $routeProvider
+    .config(['$routeProvider', 
+        function($routeProvider) {
+            $routeProvider
 
-            .when('/', {
-                templateUrl : 'views/main.html',
-                controller  : 'controllers/mainController.js'
-            });
-    });
+                .when('/', {
+                    templateUrl : 'views/main.html',
+                    controller  : 'mainController'
+                });
+    }]);

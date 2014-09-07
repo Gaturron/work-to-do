@@ -1,5 +1,9 @@
-angular.module('work-to-do').controller('mainController', function($scope) {
+angular.module('worktodoControllers', [])
 
-    $scope.message = 'Everyone come and see how good I look!';
-    $scope.currentTime = new Date();
-});
+    .controller('mainController', ['$scope', 
+
+        function($scope) {
+            $scope.message = 'Everyone come and see how good I look!';
+            $scope.currentTime = new Date();
+        }
+    ]);
